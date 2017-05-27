@@ -16,8 +16,8 @@ class Sigmoid(Layer):
         return self.output
 
     def get_derivative(self):
-        sub_prod = T.sub(np.ones(self.output.shape.eval()[0]), self.output)
+        sub_prod = T.ones_like(self.output[:0]) - self.output
         return self.output * sub_prod
 
     def get_input_gradient(self, output_gradient):
-        return math_utils.vec_elemwise(output_gradient, self.get_derivative())
+        return output_gradient * self.get_derivative()
