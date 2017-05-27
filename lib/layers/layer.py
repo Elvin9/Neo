@@ -6,4 +6,6 @@ import numpy as np
 class Layer(object):
 	def _get_output(input):
 		raise NotImplemented
+	def _update_parameters(delta):
+		raise NotImplemented
 
