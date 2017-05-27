@@ -1,23 +1,23 @@
-from layer import Layer
-
 from theano.tensor.nnet.nnet import sigmoid
 import theano.tensor as T
 
 import numpy as np
 
-import math_utils
+from lib import math_utils
+from lib.layers.layer import Layer
+
 
 class Sigmoid(Layer):
-	def __init__(self):
-		super(self, Sigmoid)
+    def __init__(self):
+        super().__init__()
 
-	def get_output(self, input):
-		self.output = sigmoid(input)
-		return output
+    def get_output(self, inp):
+        self.output = sigmoid(inp)
+        return self.output
 
-	def get_derivative(self):
-		sub_prod = T.sub(np.ones([len(self.output), 1]), self.output)
-		return math_utils.vec_elemwise(self.output, sub_prod)
+    def get_derivative(self):
+        sub_prod = T.sub(np.ones([self.output.shape.eval()[0], 1]), self.output)
+        return math_utils.vec_elemwise(self.output, sub_prod)
 
-	def get_input_gradient(self, output_gradient):
-		return math_utils.vec_elemwise(output_gradient, get_derivative)
+    def get_input_gradient(self, output_gradient):
+        return math_utils.vec_elemwise(output_gradient, self.get_derivative())
