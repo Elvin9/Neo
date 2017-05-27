@@ -5,19 +5,19 @@ import theano.tensor as T
 
 import numpy as np
 
-import ../math_utils
+import math_utils
 
 class Sigmoid(Layer):
 	def __init__(self):
-		self.output = 0
+		super(self, Sigmoid)
 
-	def _get_output(input):
+	def get_output(self, input):
 		self.output = sigmoid(input)
 		return output
 
-	def _get_derivative():
+	def get_derivative(self):
 		sub_prod = T.sub(np.ones([len(self.output), 1]), self.output)
-		math_utils.vec_elemwise()
+		return math_utils.vec_elemwise(self.output, sub_prod)
 
-	def _get_input_gradient(output_gradient):
-		return 0
+	def get_input_gradient(self, output_gradient):
+		return math_utils.vec_elemwise(output_gradient, get_derivative)
