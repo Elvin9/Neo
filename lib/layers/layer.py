@@ -6,7 +6,7 @@ class Layer(object):
     def get_output(self, inp):
         raise NotImplemented
 
-    def update_parameters(self, delta):
+    def update_parameters(self, output_gradient, rate):
         raise NotImplemented
 
     def get_input_gradient(self, output_gradient):
