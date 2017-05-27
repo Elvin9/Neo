@@ -3,11 +3,11 @@ class Layer(object):
         self.output = 0
         self.input = 0
 
-    def get_output(input):
+    def get_output(self, inp):
         raise NotImplemented
 
-    def update_parameters(delta):
+    def update_parameters(self, delta):
         raise NotImplemented
 
-    def get_input_gradient(output_gradient):
+    def get_input_gradient(self, output_gradient):
         raise NotImplemented
