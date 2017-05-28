@@ -1,3 +1,4 @@
+gnumpy
 numpy
-Theano
+cudamat
 matplotlib
