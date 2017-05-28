@@ -1,7 +1,4 @@
-from theano.tensor.nnet.nnet import sigmoid
-import theano.tensor as T
-
-import numpy as np
+import gnumpy as gp
 
 from lib.layers.layer import Layer
 
@@ -11,11 +8,11 @@ class Sigmoid(Layer):
         super().__init__()
 
     def get_output(self, inp):
-        self.output = sigmoid(inp)
+        self.output = gp.logistic(inp)
         return self.output
 
     def get_derivative(self):
-        sub_prod = T.ones_like(self.output[:0]) - self.output
+        sub_prod = gp.ones([1, self.output.shape[0]]) - self.output
         return self.output * sub_prod
 
     def get_input_gradient(self, output_gradient):
