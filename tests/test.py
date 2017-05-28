@@ -2,7 +2,7 @@ import numpy as np
 import gnumpy as gp
 import time
 
-size = 1000
+size = 3000
 
 na = np.random.randn(size, size)
 nb = np.random.randn(size, size)
@@ -17,13 +17,13 @@ print('Initialization time: %f' % (end_t - start_t))
 for i in range(4):
 
     start_t = time.time()
-    res = na * nb
+    res = np.dot(na, nb)
     end_t = time.time()
 
     print('Numpy time: %f' % (end_t - start_t))
 
     start_t = time.time()
-    res = a * b
+    res = gp.dot(a, b)
     end_t = time.time()
 
     print('GPU time: %f' % (end_t - start_t))
