@@ -35,10 +35,14 @@ class SequentialModel(object):
             layer.update_parameters(output_grad, self.learning_rate)
             output_grad = layer.get_input_gradient(output_grad)
 
-    def train(self, input_batch, prediction_batch, batch_size=1):
+    def train(self, input_batch, prediction_batch, batch_size=1, error=False):
         # Cast matrices to gnumpy types
         input_batch = gp.garray(input_batch)
         prediction_batch = gp.garray(prediction_batch)
+
+        # Return list of errors, sorted by time (stepped by chunk)
+        if error:
+            error_lst = []
 
         # Train
         for chunk_cursor in range(input_batch.shape[1], batch_size):
@@ -48,3 +52,6 @@ class SequentialModel(object):
             # Forward + backward prop
             output = self.forward(input_chunk)
             self.__update_weights(output, prediction_batch)
+
+            if error:
+                error_lst.append(self.loss.get_output(output))
