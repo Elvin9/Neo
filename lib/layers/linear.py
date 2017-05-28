@@ -1,5 +1,4 @@
 import gnumpy as gp
-import numpy as np
 from .layer import Layer
 
 
@@ -34,5 +33,5 @@ class Linear(Layer):
         return gradient
 
     def update_parameters(self, output_gradient, rate):
-        self.weights = self.weights - (rate * self.get_input_gradient(output_gradient))
+        self.weights = self.weights - (rate * self.get_parameter_gradient(output_gradient))
 
