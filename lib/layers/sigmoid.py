@@ -3,7 +3,6 @@ import theano.tensor as T
 
 import numpy as np
 
-from lib import math_utils
 from lib.layers.layer import Layer
 
 

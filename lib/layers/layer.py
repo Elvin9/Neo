@@ -4,10 +4,10 @@ class Layer(object):
         self.input = 0
 
     def get_output(self, inp):
-        raise NotImplemented
+        pass
 
     def update_parameters(self, output_gradient, rate):
-        raise NotImplemented
+        pass
 
     def get_input_gradient(self, output_gradient):
-        raise NotImplemented
+        pass
