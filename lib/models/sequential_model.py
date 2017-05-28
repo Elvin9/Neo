@@ -22,7 +22,7 @@ class SequentialModel(object):
 
     def __update_weights(self, output, prediction):
 
-        # Get error from loss function
+        # Get error from loss_functions function
         output_grad = None
         if self.loss:
             self.loss.get_output(output, prediction)

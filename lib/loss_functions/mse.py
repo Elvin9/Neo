@@ -1,6 +1,6 @@
 import gnumpy as gp
 import numpy as np
-from lib.loss.loss import Loss
+from lib.loss_functions.loss import Loss
 
 
 class MSELoss(Loss):

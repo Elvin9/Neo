@@ -1,4 +1,4 @@
-from lib.loss.mse import MSELoss
+from lib.loss_functions.mse import MSELoss
 import gnumpy as gp
 
 mse = MSELoss()
