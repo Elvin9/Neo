@@ -38,14 +38,3 @@ print("1  1 : " + str(model.forward(test_x)))
 test_x = np.array([[0], [0]])
 print("0  0 : " + str(model.forward(test_x)))
 
-# model.add_layer(Linear(1, 1, bias=False))
-#
-# x_data = np.random.randint(10, size=(1, data_size))
-# y_data = np.array(x_data)
-#
-# errors = model.train(x_data, y_data, batch_size=1, error=True)
-# print(errors)
-#
-# test_x = np.array([[4]])
-#
-# print(model.forward(test_x))
