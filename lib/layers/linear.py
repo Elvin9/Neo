@@ -30,7 +30,7 @@ class Linear(Layer):
         w_t = self.weights.T
 
         if self.bias:
-            gradient = gp.dot(w_t[:len(w_t) - 1], output_gradient)
+            gradient = gp.dot(np.reshape(w_t[:len(w_t) - 1], [w_t.shape[0] - 1, w_t.shape[1]]), output_gradient)
         else:
             gradient = gp.dot(w_t, output_gradient)
         return gradient
