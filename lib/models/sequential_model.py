@@ -20,26 +20,27 @@ class SequentialModel(object):
             output = layer.get_output(output)
         return output
 
-    def __update_weights(self, output, prediction):
+    def __update_weights(self, output, target):
 
         # Get error from loss_functions function
         output_grad = None
         if self.loss:
-            self.loss.get_output(output, prediction)
-            output_grad = self.loss.get_input_gradient(prediction)
+            self.loss.get_output(output, target)
+            output_grad = self.loss.get_input_gradient(target)
         else:
             raise Exception('[*] Loss function was not specified')
 
         # Back propagate layers
         for layer in self.layers[::-1]:
-            layer.update_parameters(output_grad, self.learning_rate)
+            prev_output_grad = output_grad
             output_grad = layer.get_input_gradient(output_grad)
+            layer.update_parameters(prev_output_grad, self.learning_rate)
 
-    def train(self, input_batch, prediction_batch, batch_size=1, error=False):
+    def train(self, input_batch, target_batch, batch_size=1, error=False):
 
         # Cast matrices to gnumpy types
-        input_batch = gp.garray(input_batch)
-        prediction_batch = gp.garray(prediction_batch)
+        # input_batch = gp.garray(input_batch)
+        # prediction_batch = gp.garray(prediction_batch)
 
         current_input = []
         current_prediction = []
@@ -50,15 +51,15 @@ class SequentialModel(object):
 
         # Train
         for chunk_cursor in range(0, input_batch.shape[1], batch_size):
-            current_input = input_batch[:, chunk_cursor:chunk_cursor + batch_size]
-            current_prediction = prediction_batch[:, chunk_cursor:chunk_cursor + batch_size]
+            current_input = gp.garray(input_batch[:, chunk_cursor:chunk_cursor + batch_size])
+            current_target = gp.garray(target_batch[:, chunk_cursor:chunk_cursor + batch_size])
             
             # Forward + backward prop
             output = self.forward(current_input)
-            self.__update_weights(output, current_prediction)
+            self.__update_weights(output, current_target)
 
             if error:
-                error_lst.append(float(self.loss.get_output(output, current_prediction)))
+                error_lst.append(float(self.loss.get_output(output, current_target)))
 
         if error:
             return error_lst

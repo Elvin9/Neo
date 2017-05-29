@@ -4,8 +4,8 @@ from lib.layers.sigmoid import Sigmoid
 from lib.loss_functions.mse import MSELoss
 from lib.models.sequential_model import SequentialModel
 
-rate = 0.0001
-data_size = 1000
+rate = 0.1
+data_size = 100
 
 loss = MSELoss()
 model = SequentialModel(loss, rate)
@@ -25,8 +25,18 @@ y_data = y_data
 errors = model.train(x_data, y_data, batch_size=1, error=True)
 print(errors)
 
-test_x = np.array([[0], [0]])
+test_x = np.array([[1], [0]])
 
 print(model.forward(test_x))
 
-
+# model.add_layer(Linear(1, 1, bias=False))
+#
+# x_data = np.random.randint(10, size=(1, data_size))
+# y_data = np.array(x_data)
+#
+# errors = model.train(x_data, y_data, batch_size=1, error=True)
+# print(errors)
+#
+# test_x = np.array([[4]])
+#
+# print(model.forward(test_x))
