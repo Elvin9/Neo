@@ -38,10 +38,6 @@ class SequentialModel(object):
 
     def train(self, input_batch, target_batch, batch_size=1, error=False):
 
-        # Cast matrices to gnumpy types
-        # input_batch = gp.garray(input_batch)
-        # prediction_batch = gp.garray(prediction_batch)
-
         current_input = []
         current_prediction = []
 
