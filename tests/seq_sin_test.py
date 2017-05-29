@@ -17,7 +17,7 @@ data_x = np.array([np.random.rand(data_size)*180])
 data_x = np.deg2rad(data_x)
 data_y = np.sin(data_x)
 
-errors = model.train(data_x, data_y, batch_size=15, error=False)
+errors = model.train(data_x, data_y, batch_size=5, error=False)
 
 # print(errors)
 
