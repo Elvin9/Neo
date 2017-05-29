@@ -12,7 +12,7 @@ class Linear(Layer):
         if self.bias:
             input_num += 1
 
-        self.weights = (gp.rand(output_num, input_num))
+        self.weights = (gp.rand(output_num, input_num) * (1.0 / gp.sqrt(input_num)))
 
     def get_output(self, inp):
 
