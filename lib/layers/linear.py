@@ -1,4 +1,5 @@
 import gnumpy as gp
+import numpy as np
 from .layer import Layer
 
 
@@ -12,7 +13,7 @@ class Linear(Layer):
         if self.bias:
             input_num += 1
 
-        self.weights = gp.ones((output_num, input_num))
+        self.weights = gp.garray(np.random.rand(output_num, input_num))
 
     def get_output(self, inp):
 

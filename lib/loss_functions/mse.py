@@ -17,8 +17,4 @@ class MSELoss(Loss):
         return np.diag(self.output.as_numpy_array())
 
     def get_input_gradient(self, prediction, inp=None):
-
-        if not inp:
             return prediction - self.input
-        else:
-            return prediction - inp
