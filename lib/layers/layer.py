@@ -6,7 +6,7 @@ class Layer(object):
     def get_output(self, inp):
         pass
 
-    def update_parameters(self, output_gradient):
+    def update_parameters(self, output_gradient, rate):
         pass
 
     def get_input_gradient(self, output_gradient):

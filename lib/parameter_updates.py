@@ -3,24 +3,23 @@ import gnumpy as gp
 
 class SGD:
 
-    def __init__(self, learning_rate):
-        self.rate = learning_rate
+    def __init__(self):
+        pass
 
-    def parameters_delta(self, gradient):
-        return -self.rate * gradient
+    def parameters_delta(self, gradient, rate):
+        return -rate * gradient
 
 
 class Momentum:
 
-    def __init__(self, learning_rate, mu):
+    def __init__(self, mu):
         self.v = None
-        self.rate = learning_rate
         self.mu = mu
 
-    def parameters_delta(self, gradient):
+    def parameters_delta(self, gradient, rate):
         if self.v is None:
             self.v = gp.zeros(gradient.shpe)
 
-        self.v = (self.mu * self.v) - (self.rate * gradient)
+        self.v = (self.mu * self.v) - (rate * gradient)
         return self.v
 

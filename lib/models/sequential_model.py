@@ -3,9 +3,10 @@ import gnumpy as gp
 
 class SequentialModel(object):
 
-    def __init__(self, loss=None):
+    def __init__(self,  learning_rate, loss=None):
         self.layers = []
         self.loss = loss
+        self.rate = learning_rate
 
     def set_loss(self, loss):
         self.loss = loss
@@ -33,7 +34,7 @@ class SequentialModel(object):
         for layer in self.layers[::-1]:
             prev_output_grad = output_grad
             output_grad = layer.get_input_gradient(output_grad)
-            layer.update_parameters(prev_output_grad)
+            layer.update_parameters(prev_output_grad, self.rate)
 
     def train(self, input_batch, target_batch, batch_size=1, error=False):
 

@@ -46,9 +46,9 @@ class Linear(Layer):
         gradient = gp.dot(output_gradient, self.input.T)
         return gradient
 
-    def update_parameters(self, output_gradient):
+    def update_parameters(self, output_gradient, rate):
         gradient = self.get_parameter_gradient(output_gradient)
 
-        self.weights += self.parameter_update.parameters_delta(gradient)
+        self.weights += self.parameter_update.parameters_delta(gradient, rate)
 
 
