@@ -1,8 +1,12 @@
 import gnumpy as gp
 
+class ParameterUpdate:
 
-class SGD:
+    def parameter_delta(self, gradient, rate):
+        pass
 
+
+class SGD(ParameterUpdate):
     def __init__(self):
         pass
 
@@ -10,7 +14,10 @@ class SGD:
         return -rate * gradient
 
 
-class Momentum:
+class Momentum(ParameterUpdate):
+    """
+    mu is usually something like: [0.5, 0.9, 0.95, 0.99]
+    """
 
     def __init__(self, mu):
         self.v = None
@@ -23,3 +30,21 @@ class Momentum:
         self.v = (self.mu * self.v) - (rate * gradient)
         return self.v
 
+
+class Adagrad(ParameterUpdate):
+    """
+    epsilon is usually somewhere between: [1e-4, 1e-8]
+    """
+
+    def __init__(self, epsilon):
+        self.epsilon = epsilon
+        self.cache = None
+
+    def parameter_delta(self, gradient, rate):
+        if self.cache is None:
+            self.cache = gp.zeros(gradient)
+
+        self.cache = gradient * gradient
+        denumer = gp.sqrt(self.cache) + self.epsilon
+        inv_denumer = gp.garray(1.0 / denumer.to_numpy_array())
+        return (-rate * gradient) * inv_denumer

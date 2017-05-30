@@ -11,8 +11,7 @@ class CrossEntropy(Loss):
     def get_output(self, inp, target):
 
         self.input = inp
-        errors = (target * gp.log(self.input)) + \
-                 (gp.ones(target.shape) - target) * gp.log(gp.ones(self.input.shape) - self.input)
+        errors = (target * gp.log(self.input)) + ((1 - target) * gp.log(1 - self.input))
 
         return -(1.0 / self.input.shape[0]) * gp.sum(errors, axis=0)
 
