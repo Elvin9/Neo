@@ -5,4 +5,6 @@ softmax = Softmax()
 
 a = gp.garray([[1, 3], [2, 2], [3, 1]])
 o = softmax.get_output(a)
+d = softmax.get_derivative()
 print(o)
+print(d)

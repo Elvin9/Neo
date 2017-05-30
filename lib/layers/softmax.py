@@ -12,7 +12,8 @@ class Softmax(Layer):
         inv_exp_sum = gp.garray((1 / exp_sum))
         inv_exp_sum = gp.tile(inv_exp_sum, (inp.shape[0], 1))
 
-        return gp.exp(inp) * inv_exp_sum
+        self.output = gp.exp(inp) * inv_exp_sum
+        return self.output
 
     def get_derivative(self):
         sub_prod = gp.ones(self.output.shape) - self.output
