@@ -12,7 +12,7 @@ class Sigmoid(Layer):
         return self.output
 
     def get_derivative(self):
-        sub_prod = gp.ones(self.output.shape) - self.output
+        sub_prod = 1 - self.output
         return self.output * sub_prod
 
     def get_input_gradient(self, output_gradient):
