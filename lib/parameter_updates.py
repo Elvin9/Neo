@@ -18,7 +18,7 @@ class Momentum:
 
     def parameters_delta(self, gradient, rate):
         if self.v is None:
-            self.v = gp.zeros(gradient.shpe)
+            self.v = gp.zeros(gradient.shape)
 
         self.v = (self.mu * self.v) - (rate * gradient)
         return self.v
