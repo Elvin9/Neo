@@ -13,7 +13,7 @@ class ReLU(Layer):
         return gp.garray(inp) * tmp_grt
 
     def get_derivative(self):
-        return gp.garray(self.input) > gp.zeros(self.input.shape)
+        return gp.garray(self.input) > 0
 
     def get_input_gradient(self, output_gradient):
         return output_gradient * self.get_derivative()
@@ -34,7 +34,7 @@ class LeakyReLU(Layer):
         return tmp_grt * 0.01 * inp + tmp_grt2 * inp
 
     def get_derivative(self):
-        return gp.garray(self.input) > gp.zeros(self.input.shape)
+        return gp.garray(self.input) > 0
 
     def get_input_gradient(self, output_gradient):
         return output_gradient * self.get_derivative()
@@ -58,7 +58,7 @@ class ELU(Layer):
         return tmp_grt * coefficient * inp + tmp_grt2 * inp
 
     def get_derivative(self):
-        return gp.garray(self.input) > gp.zeros(self.input.shape)
+        return gp.garray(self.input) > 0
 
     def get_input_gradient(self, output_gradient):
         return output_gradient * self.get_derivative()
