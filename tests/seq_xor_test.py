@@ -7,15 +7,15 @@ from lib.loss_functions.mse import MSELoss
 from lib.models.sequential_model import SequentialModel
 from lib.parameter_updates import SGD
 
-rate = 0.01
-data_size = 2000
+rate = 10
+data_size = 100
 
 model = SequentialModel(rate, MSELoss())
 
 model.add_layer(Linear(2, 2, bias=False, parameter_update=SGD()))
-model.add_layer(ReLU())
+model.add_layer(Sigmoid())
 model.add_layer(Linear(2, 1, bias=False, parameter_update=SGD()))
-model.add_layer(ReLU())
+model.add_layer(Sigmoid())
 
 
 x_data = np.array([np.random.binomial(1, 0.5, 2) for x in range(data_size)])
