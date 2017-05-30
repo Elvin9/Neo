@@ -2,7 +2,7 @@ import gnumpy as gp
 
 class ParameterUpdate:
 
-    def parameter_delta(self, gradient, rate):
+    def parameters_delta(self, gradient, rate):
         pass
 
 
@@ -40,11 +40,11 @@ class Adagrad(ParameterUpdate):
         self.epsilon = epsilon
         self.cache = None
 
-    def parameter_delta(self, gradient, rate):
+    def parameters_delta(self, gradient, rate):
         if self.cache is None:
-            self.cache = gp.zeros(gradient)
+            self.cache = gp.zeros(gradient.shape)
 
-        self.cache = gradient * gradient
+        self.cache += gradient * gradient
         denumer = gp.sqrt(self.cache) + self.epsilon
-        inv_denumer = gp.garray(1.0 / denumer.to_numpy_array())
+        inv_denumer = gp.garray(1.0 / denumer.as_numpy_array())
         return (-rate * gradient) * inv_denumer
