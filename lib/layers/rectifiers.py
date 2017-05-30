@@ -53,7 +53,7 @@ class ELU(Layer):
         tmp_grt = inp < 0
         tmp_grt2 = inp > 0
 
-        coefficient = self.coefficient * (gp.exp(inp) - gp.ones(inp.shape))
+        coefficient = self.coefficient * (gp.exp(inp) - 1)
 
         return tmp_grt * coefficient * inp + tmp_grt2 * inp
 

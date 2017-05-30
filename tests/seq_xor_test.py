@@ -26,7 +26,6 @@ x_data = x_data.T
 y_data = y_data
 
 errors = model.train(x_data, y_data, batch_size=10, error=True)
-print(errors)
 print('\n')
 
 test_x = np.array([[1], [0]])
