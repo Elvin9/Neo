@@ -1,6 +1,6 @@
 import numpy as np
 
-from lib.layers.ReLU import ReLU
+from lib.layers.rectifiers import ReLU
 from lib.layers.linear import Linear
 from lib.layers.sigmoid import Sigmoid
 from lib.loss_functions.mse import MSELoss
