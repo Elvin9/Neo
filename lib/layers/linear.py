@@ -5,10 +5,11 @@ from .layer import Layer
 
 class Linear(Layer):
 
-    def __init__(self, input_num, output_num, bias=True):
+    def __init__(self, input_num, output_num, parameter_update, bias=True):
         super().__init__()
 
         self.bias = bias
+        self.parameter_update = parameter_update
 
         if self.bias:
             input_num += 1
@@ -45,6 +46,9 @@ class Linear(Layer):
         gradient = gp.dot(output_gradient, self.input.T)
         return gradient
 
-    def update_parameters(self, output_gradient, rate):
-        self.weights = self.weights - (rate * self.get_parameter_gradient(output_gradient))
+    def update_parameters(self, output_gradient):
+        gradient = self.get_parameter_gradient(output_gradient)
+
+        self.weights += self.parameter_update.parameters_delta(gradient)
+
 
