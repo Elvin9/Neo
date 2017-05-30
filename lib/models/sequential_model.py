@@ -55,7 +55,9 @@ class SequentialModel(object):
             self.__update_weights(output, current_target)
 
             if error:
-                error_lst.append(float(self.loss.get_output(output, current_target)))
+                error_output = self.loss.get_output(output, current_target)
+                for err in error_output:
+                    error_lst.append(float(err))
 
         if error:
             return error_lst
