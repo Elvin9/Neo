@@ -19,7 +19,7 @@ class Momentum(ParameterUpdate):
     mu is usually something like: [0.5, 0.9, 0.95, 0.99]
     """
 
-    def __init__(self, mu):
+    def __init__(self, mu=0.9):
         self.v = None
         self.mu = mu
 
@@ -36,7 +36,7 @@ class Adagrad(ParameterUpdate):
     epsilon is usually somewhere between: [1e-4, 1e-8]
     """
 
-    def __init__(self, epsilon):
+    def __init__(self, epsilon=1e-4):
         self.epsilon = epsilon
         self.cache = None
 
