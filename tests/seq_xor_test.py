@@ -6,9 +6,10 @@ from lib.layers.sigmoid import Sigmoid
 from lib.loss_functions.mse import MSELoss
 from lib.models.sequential_model import SequentialModel
 from lib.parameter_updates import SGD
+import matplotlib.pyplot as plt
 
-rate = 10
-data_size = 100
+rate = 0.01
+data_size = 10000
 
 model = SequentialModel(rate, MSELoss())
 
@@ -24,8 +25,7 @@ y_data = np.array([[x[0] ^ x[1] for x in x_data]])
 x_data = x_data.T
 y_data = y_data
 
-errors = model.train(x_data, y_data, batch_size=10, error=False)
-# print(errors)
+errors = model.train(x_data, y_data, batch_size=1, error=True)
 print('\n')
 
 test_x = np.array([[1], [0]])
@@ -39,4 +39,11 @@ print("1  1 : " + str(model.forward(test_x)))
 
 test_x = np.array([[0], [0]])
 print("0  0 : " + str(model.forward(test_x)))
+
+error_x = np.arange(0, len(errors), 1)
+plt.plot(error_x, errors)
+
+plt.show()
+
+
 
