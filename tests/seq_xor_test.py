@@ -1,6 +1,6 @@
 import numpy as np
 
-from lib.layers.ReLU import ReLU
+from lib.layers.rectifiers import ReLU
 from lib.layers.linear import Linear
 from lib.layers.sigmoid import Sigmoid
 from lib.loss_functions.mse import MSELoss
@@ -25,7 +25,8 @@ y_data = np.array([[x[0] ^ x[1] for x in x_data]])
 x_data = x_data.T
 y_data = y_data
 
-errors = model.train(x_data, y_data, batch_size=1, error=True)
+errors = model.train(x_data, y_data, batch_size=10, error=True)
+print(errors)
 print('\n')
 
 test_x = np.array([[1], [0]])

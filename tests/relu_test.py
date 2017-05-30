@@ -1,4 +1,4 @@
-from lib.layers.ReLU import ReLU, LeakyReLU, ELU
+from lib.layers.rectifiers import ReLU, LeakyReLU, ELU
 import numpy as np
 
 x = ReLU()
