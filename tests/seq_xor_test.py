@@ -11,7 +11,7 @@ from lib.models.sequential_model import SequentialModel
 from lib.parameter_updates import SGD, Adagrad, Momentum
 import matplotlib.pyplot as plt
 
-rate = 0.001
+rate = 0.01
 data_size = 10000
 
 model = SequentialModel(rate, MSELoss())
@@ -21,6 +21,7 @@ model.add_layer(Tanh())
 model.add_layer(Linear(5, 5, bias=False, parameter_update=Momentum()))
 model.add_layer(Tanh())
 model.add_layer(Linear(5, 2, bias=False, parameter_update=Momentum()))
+model.add_layer(Tanh())
 
 
 x_data = np.array([np.random.binomial(1, 0.5, 2) for x in range(data_size)])
