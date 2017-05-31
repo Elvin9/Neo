@@ -11,10 +11,10 @@ class Linear(Layer):
         self.bias = bias
         self.parameter_update = parameter_update
 
-        if self.bias:
-            input_num += 1
+        self.weights = (gp.randn(output_num, input_num) * (np.sqrt(2.0 / input_num)))
 
-        self.weights = (gp.rand(output_num, input_num) * (1.0 / gp.sqrt(input_num)))
+        if self.bias:
+            self.weights = gp.concatenate((self.weights, gp.zeros((output_num, 1))), axis=1)
 
     def get_output(self, inp):
 
