@@ -29,3 +29,19 @@ class CrossEntropy(Loss):
     def get_input_gradient(self, target):
         denumer = gp.garray(1.0 / self.input.as_numpy_array())
         return -(1.0 / self.input.shape[0]) * target * denumer
+
+
+class SoftmaxCrossEntropyLoss(Loss):
+    def __init__(self):
+        super().__init__()
+
+    def get_output(self, inp, target):
+
+        self.input = inp
+        errors = (target * gp.log(self.input)) + ((1 - target) * gp.log(1 - self.input))
+
+        return -(1.0 / self.input.shape[0]) * gp.sum(errors, axis=0)
+
+    def get_input_gradient(self, target):
+        # assuming the previous layer is SoftmaxCrossEntropyLayer
+        return -(1.0 / self.input.shape[0]) * (target - self.input)
