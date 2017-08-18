@@ -1,4 +1,5 @@
-# Neo  ![alt text](https://img.shields.io/teamcity/codebetter/bt428.svg)
+# Neo 
+![alt text](https://img.shields.io/teamcity/codebetter/bt428.svg)
 
 A W.I.P toy machine learning framework
 
