@@ -82,6 +82,8 @@ model.add_layer(Tanh())
 model.add_layer(Linear(30, 2, parameter_update=Momentum()))
 model.add_layer(SoftmaxCrossEntropyLayer())
 
+# print(x_train.shape)
+# print(y_train.shape)
 errors = model.train(x_train, y_train, batch_size=20, error=True)
 
 correct = 0.0

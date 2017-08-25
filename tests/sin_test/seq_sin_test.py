@@ -24,8 +24,9 @@ errors = model.train(data_x, data_y, batch_size=5, error=False)
 
 # print(errors)
 
-test_x = np.arange(0, np.pi, 0.05)
-test_y = np.sin(test_x)
+test_x = np.arange(0, np.pi, 0.05).T
+test_y = np.sin(test_x).T
+
 pred = [model.forward(np.array([[x]])) for x in test_x]
 
 

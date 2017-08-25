@@ -48,6 +48,7 @@ class Convolution(Layer):
     def get_output(self, inp):
 
         self.input = inp
+
         self.output = gp.zeros(self._get_output_shape(inp.shape))
         inp = self._zero_padding(inp, self.padding)
 
@@ -75,13 +76,13 @@ class Convolution(Layer):
         output_gradient = self._zero_padding(output_gradient, gradient_padding)
 
         # flip the weights for the gradient computation
-        weights = gp.garray(self.kernel_weights.as_numpy_array()[::, ::-1, ::-1])
+        weights = gp.garray(self.kernel_weights.as_numpy_array()[::, ::, ::-1, ::-1])
 
         for out_i, i in enumerate(range(0, output_gradient.shape[1] - self.kernel_shape[1] + 1, self.stride)):
             for out_j, j in enumerate(range(0, output_gradient.shape[2] - self.kernel_shape[2] + 1, self.stride)):
                 field = output_gradient[:, i:i + self.kernel_shape[1], j:j + self.kernel_shape[2]]
 
-                for weight_slice_k in range(self.kernel_shape[1]):
+                for weight_slice_k in range(self.kernel_shape[0]):
                     weight_slice = weights[:, weight_slice_k, :, :]
                     result = (weight_slice.T * field.T).T
 

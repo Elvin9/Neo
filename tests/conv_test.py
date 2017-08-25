@@ -36,9 +36,10 @@ output_grad = gp.garray([
                 ])
 
 grad = conv.get_input_gradient(output_grad)
+print(grad)
 conv.update_parameters(output_grad, rate=0.1)
 
-print(conv.bias_weights)
-print(conv.kernel_weights)
+# print(conv.bias_weights)
+# print(conv.kernel_weights)
 # print(grad)
 
