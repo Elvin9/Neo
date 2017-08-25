@@ -1,4 +1,6 @@
-# Neo
+# Neo 
+![alt text](https://img.shields.io/teamcity/codebetter/bt428.svg)
+
 A W.I.P toy machine learning framework
 
 ![alt text](http://download.gamezone.com/uploads/image/data/1201507/article_post_width_Thomas-Anderson-aka-Neo-the-Matrix-1024x516.jpg)
